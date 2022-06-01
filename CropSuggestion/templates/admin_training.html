@@ -1,0 +1,26 @@
+{% include 'admin_header.html' %}
+
+
+<div class="container-fluid col-md-12"  style="background-image: url(/static/images/farmer.jpg);height: 600px;background-position: center;background-repeat: no-repeat;background-size: cover;">
+
+<center><h1>Test and Train System</h1></center>
+<form method="post" enctype="multipart/form-data">
+	<table align="center" border="1">
+		<tr style="height: 50px;">
+			<td colspan="2" align="center">Select csv dataset file for testing: &nbsp;<input type="file" name="dataset"></td>
+			
+		</tr>
+		<tr style="height: 50px;">
+			<td colspan="2" align="center">
+				<input type="submit" class="btn btn-primary" name="btn_train" value="Start Testing and Training">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<h3>{{data['result']}}</h3>
+			</td>
+		</tr>
+	</table>
+</form>
+</div>
+{% include 'footer.html' %}

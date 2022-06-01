@@ -1,0 +1,93 @@
+{%  include 'farmer_header.html' %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+
+$(document).ready(function(){
+
+    $("select#state").change(function() {
+
+        if ($(this).val() != 'default') {
+        	alert("Haii");
+            var br = $('#state option:selected').val();
+
+
+            $.ajax({
+                type: 'POST',
+                url: "/farmer/getplaces",
+                data: { state: br },
+
+                success: function(response) {
+                var opt = '';
+                // alert(response);
+                var opt = '';
+				response=response.replace('"','');
+				response=response.replace('"','');
+				var res=response.split(',')
+				alert(res)
+    for (var i=0, l=res.length; i<l; i=i+2)
+    {
+        opt+='<option value="'+res[i]+'">'+res[i+1]+'</option>';
+
+}
+
+ $('select#place').html('').prop('disabled',false)
+    $('select#place').append(opt);
+                }
+            });
+        }
+        else {
+            $('select#place').html('').prop('disabled',true);
+        }
+    });
+});
+</script>
+
+
+<div class="container-fluid col-md-12"  style="background-image: url(/static/images/ff1.jpeg);height: 600px;background-position: center;background-repeat: no-repeat;background-size: cover;">
+
+
+<center>
+    <h1 style="padding-top: 4em;font-weight: 30px;font-weight: 800">Plot in Image</h1>
+<form method='post'>
+<table class="table" style="width: 500px;"> 
+		
+		
+			<tr>
+				<td align="center">State: &nbsp; </td>
+				<td><select name="state" class="form-control"  id="state" onchange="ajaxcheck()">
+						{% for row in data['val'] %}
+						<option value="{{ row['state']}}">{{row['state']}}</option>
+						{% endfor %}
+					</select></td>
+			</tr>
+			<tr>
+				<td align="center">Place: &nbsp; </td>
+				<td>
+
+				<select name="place" id="place" disabled="true">
+			        <option>Select a place</option>
+			    </select>
+			</td>
+			<tr>
+			<th>Year</th>
+			<td><select name="year">
+				{{data['years']}}
+				<option>Select</option>
+				{% for row in data['years'] %}
+				<option value="{{ row['years'] }}">{{ row['years'] }}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+		<td colspan='2' align="center"><input type="submit" name="submit" value="Plot" class="btn btn-primary"></td>
+		</tr>
+</table>
+
+
+</form>
+</center>
+</div>
+
+
+{% include 'footer.html' %}

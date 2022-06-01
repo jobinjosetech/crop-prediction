@@ -1,0 +1,89 @@
+{% include 'farmer_header.html' %}
+
+<div class="container-fluid col-md-12"  style="background-image: url(/static/images/farmer.jpg);height: 600px;background-position: center;background-repeat: no-repeat;background-size: cover;">
+
+<center><h1>Predict Your Crop</h1></center>
+<form method="post" enctype="multipart/form-data">
+	<table align="center" border="1" class="table">
+		<tr style="height: 50px;">
+			<td align="center">
+				<table border="1">
+					<tr>
+						<td align="center" colspan="2">
+							<h3>Based on your soli type</h3>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">Select soil type: &nbsp; </td>
+					<td>
+					<select name="character" class="form-control">
+						{% for row in data['soil_types'] %}
+						<option value="{{row['soil_type_id']}}">{{row['soil_name']}}</option>
+						{% endfor %}
+					</select></td>
+					</tr>
+					<tr style="height: 50px;">
+						<td colspan="2" align="center">
+							<input type="submit" name="btn_predict" class="btn btn-primary" value="Find Crop Suited">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							Soil Type Selected : <h3 style="color: red">{{data['soil']}}</h3>
+							Predicted crop set: 
+							{%for datas in data['result']%}
+							<h3 style="color: red">{{datas}}</h3>
+							{%endfor%}
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td align="center">
+				<table border="1">
+					<tr>
+						<td align="center" colspan="2">
+							<h3>Based on your soli values</h3>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">Moisture: &nbsp; </td>
+						<td><input type="text" placeholder="percentage" class="form-control" name="moisture"></td>
+					</tr>
+					<tr>
+						<td align="center">pH Value: &nbsp; </td>
+						<td><input type="text" placeholder="pH value" class="form-control" name="phvalue"></td>
+					</tr>
+					<tr>
+						<td align="center">Nitrogen: &nbsp; </td>
+						<td><input type="text" placeholder="value in mg/kg" class="form-control" name="nitrogen"></td>
+					</tr>
+					<tr>
+						<td align="center">Phosphorus: &nbsp; </td>
+						<td><input type="text"  placeholder="value in mg/kg" class="form-control" name="phosphorus"></td>
+					</tr>
+					<tr>
+						<td align="center">Potassium: &nbsp; </td>
+						<td><input type="text"  placeholder="value in mg/kg" class="form-control" name="potassium"></td>
+					</tr>
+					<tr style="height: 50px;">
+						<td colspan="2" align="center">
+							<input type="submit" name="btn_predict_value" class="btn btn-primary" value="Find Crop Suited">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							Predicted crop set: 
+							{%for datas in data['result_value']%}
+							<h3 style="color: red">{{datas}}</h3>
+							{%endfor%}
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		
+	</table>
+</form>
+
+</div>

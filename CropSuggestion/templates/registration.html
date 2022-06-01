@@ -1,0 +1,51 @@
+{% include 'public_header.html' %}
+
+<div class="container-fluid col-md-12"  style="background-image: url(/static/images/ff1.jpeg);height: 1000px;background-position: center;background-repeat: no-repeat;background-size: cover;">
+
+	<center><h1 style="padding-top: 2em;font-size: 30px;font-weight: 1200;color: #000">REGISTRATION</h1></center>
+	<form method="post">
+		<table  align="center" class="table" style="width: 500px;color: #fff;font-size: 20px">
+			<tr>
+				<th>Firstname</th>
+				<td><input type="text" name="fname" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>Lastname</th>
+				<td><input type="text" name="lname" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>Gender</th>
+				<td><input type="radio" name="gender" value="male">Male
+					<input type="radio" name="gender" value="female">Female
+					<input type="radio" name="gender" value="other">Other
+				</td>
+			</tr>
+			<tr>
+				<th>Dob</th>
+				<td><input type="date" name="dob"  class="form-control"></td>
+			</tr>
+			<tr>
+				<th>Phone</th>
+				<td><input type="number" name="phone"  class="form-control"></td>
+			</tr>
+			<tr>
+				<th>Email_id</th>
+				<td><input type="email" name="email"  class="form-control"></td>
+			</tr>
+			<tr>
+				<th>Username</th>
+				<td><input type="text" name="uname" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>Password</th>
+				<td><input type="password" name="pwd" class="form-control"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="Register" class="btn btn-primary"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+
+{% include 'footer.html' %}

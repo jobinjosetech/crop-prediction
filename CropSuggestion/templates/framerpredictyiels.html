@@ -1,0 +1,121 @@
+{% include 'farmer_header.html' %}
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+
+$(document).ready(function(){
+
+    $("select#state").change(function() {
+
+        if ($(this).val() != 'default') {
+        	alert("Haii");
+            var br = $('#state option:selected').val();
+
+
+            $.ajax({
+                type: 'POST',
+                url: "/farmer/getplace",
+                data: { state: br },
+
+                success: function(response) {
+                var opt = '';
+                // alert(response);
+                var opt = '';
+				response=response.replace('"','');
+				response=response.replace('"','');
+				var res=response.split(',')
+				alert(res)
+    for (var i=0, l=res.length; i<l; i=i+2)
+    {
+        opt+='<option value="'+res[i]+'">'+res[i+1]+'</option>';
+
+}
+
+ $('select#place').html('').prop('disabled',false)
+    $('select#place').append(opt);
+                }
+            });
+        }
+        else {
+            $('select#place').html('').prop('disabled',true);
+        }
+    });
+});
+</script>
+
+</script>
+
+<div class="container-fluid col-md-12"  style="background-image: url(/static/images/farmer.jpg);height: 600px;background-position: center;background-repeat: no-repeat;background-size: cover;">
+<center><h1>Find Fertilizer</h1></center>
+<form method="post" enctype="multipart/form-data">
+	<table align="center" border="0" class="table">
+		<tr style="height: 50px;">
+			
+			<td align="center">
+				<table border="1">
+					<tr>
+						<td align="center">State: &nbsp; </td>
+						<td><select name="state" class="form-control"  id="state" onchange="ajaxcheck()">
+								{% for row in data['state'] %}
+								<option value="{{ row['state_id']}}">{{row['state']}}</option>
+								{% endfor %}
+							</select></td>
+					</tr>
+					<tr>
+						<td align="center">Place: &nbsp; </td>
+						<td>
+
+						<select name="place" id="place" disabled="true">
+					        <option>Select a place</option>
+					    </select>
+					</td>
+					</tr>
+
+					<tr>
+						<td align="center">Time: &nbsp; </td>
+						<td><select name="time" class="form-control">
+								<option value="1">Kharif</option>
+								<option value="1">Whole Year</option>
+								<option value="1">Autumn</option>
+								<option value="1">Rabi</option>
+								<option value="1">Summer</option>
+								<option value="1">Winter</option>
+							</select</td>
+					</tr>
+					<tr>
+						<td align="center">Crop: &nbsp; </td>
+						<td><select name="crop" class="form-control">
+								{% for row in data['crop'] %}
+								<option value="{{ row['crop_id']}}">{{row['crop']}}</option>
+								{% endfor %}
+							</select></td>
+					</tr>
+					
+					</tr>
+						<td align="center">Acre: &nbsp; </td>
+						<td><input type="text" class="form-control" name="acre"></td>
+					</tr>
+					<tr>
+					
+						<td colspan="2" align="center">
+							<input type="submit" name="btn_predict_value" class="btn btn-primary" value="Predict">
+						</td>
+					</tr>
+					<tr>
+					
+						<td align="center">Predicted: &nbsp; </td>
+							<td><input type="text" name="val" value="{{ data['set'] }}">
+						</td>
+					</tr>
+				
+				</table>
+			</td>
+		</tr>
+		
+		
+	</table>
+</form>
+
+</div>

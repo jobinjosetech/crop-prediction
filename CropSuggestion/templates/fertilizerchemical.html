@@ -1,0 +1,84 @@
+{% include 'admin_header.html' %}
+<center><h1>Fertilizer Chemicals</h1></center>
+<form method="post">
+
+	{% if data['upfert'] %}
+		<table border="1" align="center" class="table">
+		<tr>
+			<th>Fertilizer name</th>
+			<td><select name="fertname">
+				{% for row in data['upfertilizer'] %}
+				<option value="{{row['fertilizer_id']}}">{{row['fertilizer_name']}}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+			<th>Chemical name</th>
+			<td><select name="cname">
+				{% for row in data['upchemical'] %}
+				<option value="{{row['chemical_id']}}">{{row['chemical_name']}}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+			<th>Quantity</th>
+			<td><input type="text" name="Quantity" value="{{data['upfert'][0]['content_quantity']}}"></td>
+		</tr>
+
+			<tr>
+			
+			<td align="center" colspan="2"><input type="submit" class="blt btn-primary" name="update" value="Update"></td>
+		</tr>
+	</table>
+	{% else %}
+
+	<table border="1" align="center" class="table">
+		<tr>
+			<th>Fertilizer name</th>
+			<td><select name="fertname">
+				<option>Select</option>
+				{% for row in data['fert_details'] %}
+				<option value="{{row['fertilizer_id']}}">{{row['fertilizer_name']}}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+			<th>Chemical name</th>
+			<td><select name="cname">
+				<option>Select</option>
+				{% for row in data['chem_details'] %}
+				<option value="{{row['chemical_id']}}">{{row['chemical_name']}}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+			<th>Quantity</th>
+			<td><input type="text" name="Quantity"></td>
+		</tr>
+		<tr>
+			
+			<td align="center" colspan="2"><input type="submit" name="submit" class="btn btn-primary" value="add chemical quantity"></td>
+		</tr>
+	</table>
+	{% endif %}
+	<br><br>
+	<center><h3>Fertilizer Chemical Table</h3></center>
+	<table align="center" border="1" class="table">
+		<thead>
+			<th>Fertilizer Name</th>
+			<th>Chemical Name</th>
+			<th>Content Quantity</th>
+			<th>Actions</th>
+		</thead>
+		{% for row in data['content'] %}
+		<tbody>
+			<td>{{row['fertilizer_name']}}</td>
+			<td>{{row['chemical_name']}}</td>
+			<td>{{row['content_quantity']}}</td>
+			<td><a href="?action=delete&id={{row['fertilizer_chemical_id']}}" class="btn btn-danger">Delete</a>
+				<a href="?action=update&id={{row['fertilizer_chemical_id']}}" class="btn btn-success">Update</a>
+		</tbody>
+		{% endfor %}
+	</table>
+	
+</form>

@@ -1,0 +1,55 @@
+{% include 'admin_header.html' %}
+<center><h1>Characteristics</h1></center>
+<form method="post" enctype="multipart/form-data">
+	{% if data['update_chemicals'] %}
+		<table border="1" align="center" class="table">
+		<tr>
+			<th>Characteristic name</th>
+			<td><input type="text" name="chemical_name" value="{{data['update_chemicals'][0]['chemical_name']}}"></td>
+		</tr>
+		<tr>
+			<th>Description</th>
+			<td><input type="text" name="desc" value="{{data['update_chemicals'][0]['desc']}}"></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2"><input type="submit" name="update" value="Update Chemicals" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+	{% else %}
+	<table border="1" align="center" class="table">
+		<tr>
+			<th>Characteristic Name</th>
+			<td><input type="text" name="chemical_name"></td>
+		</tr>
+		<tr>
+			<th>Description</th>
+			<td><input type="text" name="desc"></td>
+		</tr>
+		<tr>
+			<td align="center" colspan=2><input type="submit" name="submit" value="Add chemicals" class="btn btn-primary"></td>
+		</tr>
+	</table>
+	{% endif %}
+
+	<center><h3>Characteristic Table</h3></center>
+	<table align="center" border="1" class="table">
+		<thead>
+			<th>Characteristic Name</th>
+			<th>Description</th>
+			<th>Actions</th>
+		</thead>
+		{% for row in data['chem_details'] %}
+		<tbody>
+			<td>{{row['characteristic_name']}}</td>
+			<td>{{row['description']}}</td>
+			<td><a href="?action=delete&id={{row['characteristic_id']}}" class="btn btn-primary">Delete</a>
+				<a href="?action=update&id={{row['characteristic_id']}}" class="btn btn-primary">Update</a>
+				<a href="/admin/chemicals?&ids={{row['characteristic_id']}}" class="btn btn-primary">Characteristic Features</a></td>
+
+		</tbody>
+		{% endfor %}
+	</table>
+	</form>
+
+

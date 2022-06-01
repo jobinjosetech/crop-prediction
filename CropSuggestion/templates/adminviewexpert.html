@@ -1,0 +1,44 @@
+{% include 'admin_header.html' %}
+  
+
+<div class="container-fluid col-md-12"  style="background-image: url(/static/images/farmer.jpg);height: 1000px;background-position: center;background-repeat: no-repeat;background-size: cover;">
+
+<center>
+<form method="post">
+
+<h1 align="center" style="font-size: 25px;padding-top: 6em">EXPERTS</h1>
+<table class="table"style="font-size: 20px;color: #000;width: 500px">
+	<tr>
+		<th>Name</th>
+		<th>Email_Id</th>
+		<th>Phone No</th>
+		<th>Status</th>
+		<th>Qualification</th>
+		<th>Approve</th>
+	
+	</tr>
+	{% for row in data['exp'] %}
+	<tr>
+		<td>{{row['fname'] + row['lname'] }} </td>
+		<td>{{row['email']}}</td>
+		<td>{{row['phone']}}</td>
+		<td>{{row['usertype']}}</td>
+		<td><a href="/{{row['quali']}}"><img src="/{{row['quali']}}" height="50" width="50"></a></td>
+		
+		<td><a href="?action=approve&id={{row['login_id']}}" class="btn btn-info">Approve</a></td>
+		<td><a href="?action=reject&id={{row['login_id']}}" class="btn btn-info">Reject</a></td>
+	</tr>
+	{% endfor %}
+</table>
+
+</form>
+</center>
+                           
+	  </div>
+      
+
+
+
+{% include 'footer.html' %}
+
+

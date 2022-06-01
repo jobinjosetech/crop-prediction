@@ -1,0 +1,44 @@
+{% include 'farmer_header.html' %}
+<center><h1>Soil Details <small>Based on dataset</small></h1></center>
+<form method="post" enctype="multipart/form-data">
+	<table align="center" border="1" class="table">
+		<tr>
+			<th>Soil ID</th>
+			<th>Soil Name</th>
+			<th>Details</th>
+		</tr>
+
+		{% for row in data['soils'] %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{row['soil_type']}}</td>
+			<td><a href="?action=details&soil={{row['soil_type']}}" class="btn btn-primary">View Details</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	{% if data['set'] %}
+		<table class="table" border="1">
+			<tr>
+				<th>Crop Name</th>
+				<th>Temperature</th>
+				<th>Moisture</th>
+				<th>Nitrogen</th>
+				<th>Phosphorous</th>
+				<th>Potassium</th>
+				<th>Fertilizer</th>
+			</tr>
+			{% for x in data['set'] %}
+			<tr>
+				<th>{{x['crop_type']}}</th>
+				<th>{{x['temperature']}}</th>
+				<th>{{x['moisture']}}</th>
+				<th>{{x['nitrogen']}}</th>
+				<th>{{x['phosphorous']}}</th>
+				<th>{{x['potassium']}}</th>
+				<th>{{x['fertilizer']}}</th>
+			</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+</form>

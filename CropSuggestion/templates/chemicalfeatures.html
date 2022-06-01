@@ -1,0 +1,86 @@
+{% include 'admin_header.html' %}
+<center><h1>Chemical Features</h1></center>
+<form method="post">
+
+	{% if data['chem_features'] %}
+		<table border="1" align="center" class="table">
+		<tr>
+			<th>Soil name</th>
+			<td><select name="sname">
+				<option>Select</option>
+				{% for row in data['soil_details'] %}
+				<option value="{{row['soil_type_id']}}">{{row['soil_name']}}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+			<th>Chemical name</th>
+			<td><select name="cname">
+				<option>Select</option>
+				{% for row in data['chem_details'] %}
+				<option value="{{row['chemical_id']}}">{{row['chemical_name']}}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+			<th>Quantity</th>
+			<td><input type="text" name="Quantity" value="{{data['chem_features'][0]['content_quantity']}}"></td>
+		</tr>
+
+			<tr>
+			
+			<td align="center" colspan="2"><input type="submit" name="update" value="Update" class="btn btn-primary"></td>
+		</tr>
+	</table>
+	{% else %}
+
+	<table border="1" align="center" class="table">
+		<tr>
+			<th>Soil name</th>
+			<td><select name="sname">
+				<option>Select</option>
+				{% for row in data['soil_details'] %}
+				<option value="{{row['soil_type_id']}}">{{row['soil_name']}}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+			<th>Chemical name</th>
+			<td><select name="cname">
+				<option>Select</option>
+				{% for row in data['chem_details'] %}
+				<option value="{{row['chemical_id']}}">{{row['chemical_name']}}</option>
+				{% endfor %}
+			</select></td>
+		</tr>
+		<tr>
+			<th>Quantity</th>
+			<td><input type="text" name="Quantity"></td>
+		</tr>
+		<tr>
+			
+			<td align="center" colspan="2"><input type="submit" name="submit" value="add chemical features" class="btn btn-primary"></td>
+		</tr>
+	</table>
+	{% endif %}
+
+	<center><h3>Chemical Features Table</h3></center>
+	<table align="center" border="1" class="table">
+		<thead>
+			<th>Soil Name</th>
+			<th>Chemical name</th>
+			<th>Quantity</th>
+			<th>Action</th>
+		</thead>
+		{% for row in data['details'] %}
+		<tbody>
+			<td>{{row['soil_name']}}</td>
+			<td>{{row['chemical_name']}}</td>
+			<td>{{row['content_quantity']}}</td>
+			<td><a href="?action=delete&ids={{data['id'] }}&id={{row['chemical_feature_id']}}" class="btn btn-primary">Delete</a></td>
+				<!-- <a href="?action=update&id={{row['chemical_feature_id']}}">Update</a> -->
+		</tbody>
+		{% endfor %}
+	</table>
+	
+</form>

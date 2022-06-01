@@ -1,0 +1,54 @@
+{% include 'admin_header.html' %}
+<center><h1>Fertilizers</h1></center>
+<form method="post">
+
+	{% if data['update_fert'] %}
+		<table border="1" align="center" class="table">
+		<tr>
+			<th>fertilizer name</th>
+			<td><input type="text" name="fert_name" value="{{data['update_fert'][0]['fertilizer_name']}}"></td>
+		</tr>
+		<tr>
+			<th>Description</th>
+			<td><input type="text" name="desc" value="{{data['update_fert'][0]['description']}}"></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2"><input type="submit" name="update" value="Update fertilizer" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+	{% else %}
+
+	<table border="1" align="center" class="table">
+		<tr>
+			<th>fertilizer name</th>
+			<td><input type="text" name="fert_name"></td>
+		</tr>
+		<tr>
+			<th>Description</th>
+			<td><input type="text" name="desc"></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2"><input type="submit" name="submit" value="add fertilizer" class="btn btn-primary"></td>
+		</tr>
+	</table>
+	<br><br>
+	<center><h3>Fertilizer Table</h3></center>
+	<table align="center" border="1" class="table">
+		<thead>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Actions</th>
+		</thead>
+		{% for row in data['fert_details'] %}
+		<tbody>
+			<td>{{row['fertilizer_name']}}</td>
+			<td>{{row['description']}}</td>
+			<td><a href="?action=delete&id={{row['fertilizer_id']}}" class="btn btn-danger">Delete</a>
+				<a href="?action=update&id={{row['fertilizer_id']}}" class="btn btn-success">Update</a>
+				<a href="/admin/fertchem?&id={{row['fertilizer_id']}}" class="btn btn-primary">Fertilizer Chemicals</a></td>
+		</tbody>
+		{% endfor %}
+	</table>
+	{% endif %}
+</form>

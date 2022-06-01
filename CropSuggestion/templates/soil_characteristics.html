@@ -1,0 +1,40 @@
+{% include 'admin_header.html' %}
+<center><h1>Characteristics</h1></center>
+<form method="post" enctype="multipart/form-data">
+	<table border="1" align="center" class="table">
+		<tr>
+			<th>Characteristic Name</th>
+			<td>
+				<select name="character">
+					{% for row in data['features'] %}
+					<option value="{{row['characteristic_id']}}">{{row['characteristic_name']}}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>Content Quantity</th>
+			<td><input type="text" placeholder="max-min" name="quantity"></td>
+		</tr>
+		<tr>
+			<td align="center" colspan=2><input type="submit" name="submit" value="Add Characteristic" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+	<center><h3>Characteristic Table</h3></center>
+	<table align="center" border="1" class="table">
+		<thead>
+			<th>Characteristic Name</th>
+			<th>Quantity</th>
+			<th>Actions</th>
+		</thead>
+		{% for row in data['characteristics'] %}
+		<tbody>
+			<td>{{row['characteristic_name']}}</td>
+			<td>{{row['content_quantity']}}</td>
+			<td><a href="?action=delete&id={{row['characteristic_feature_id']}}" class="btn btn-danger">Delete</a>
+		</tbody>
+		{% endfor %}
+	</table>
+	</form>
+
